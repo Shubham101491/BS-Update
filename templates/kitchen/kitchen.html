@@ -37,7 +37,7 @@
 		</div>
 		<div class="col-md-4 kic-top1">
 			{% for p1 in p1 %}
-			<a href="{{BASE_URL}}kitchen/single">
+			<a href="{{BASE_URL}}other/single_detail_1/{{p1.id}}">
 				<img src="{{p1.image.url}}" class="img-responsive" alt="">
 			</a>
 			<h6>{{p1.item}}</h6>
@@ -47,7 +47,7 @@
 
 		<div class="col-md-4 kic-top1">
 			{% for p2 in p2 %}
-			<a href="{{BASE_URL}}kitchen/single">
+			<a href="{{BASE_URL}}other/single">
 				<img src="{{p2.image.url}}" class="img-responsive" alt="">
 			</a>
 			<h6>{{p2.item}}</h6>
@@ -57,7 +57,7 @@
 
 		<div class="col-md-4 kic-top1">
 			{% for p3 in p3 %}
-			<a href="{{BASE_URL}}kitchen/single">
+			<a href="{{BASE_URL}}other/single">
 				<img src="{{p3.image.url}}" class="img-responsive" alt="">
 			</a>
 			<h6>{{p3.item}}</h6>
@@ -83,12 +83,12 @@
 			{% for kitch in kitch %}
 			<div class="col-md-3 pro-1">
 				<div class="col-m">
-					<a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+					<a href="{{BASE_URL}}kitch_prod" data-toggle="modal" data-target="#myModal1" class="offer-img">
 						<img src="{{kitch.image.url}}" class="img-responsive" alt="">
 					</a>
 					<div class="mid-1">
 						<div class="women">
-							<h6><a href="single.html">{{kitch.item}}</a></h6>
+							<h6><a href="{{BASE_URL}}other/single_detail_1/{{kitch.id}}">{{kitch.item}}</a></h6>
 						</div>
 						<div class="mid-2">
 							<p><label>{{kitch.discount_price}}</label><em class="item_price">{{kitch.price}}</em></p>

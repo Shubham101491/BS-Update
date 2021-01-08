@@ -9,3 +9,6 @@ def care(request):
     p2 = popular2.objects.all()
     p3 = popular3.objects.all()
     return render(request, 'pcare/care.html', {"BASE_URL": settings.BASE_URL,'ayurved':ayurved,'p1':p1,'p2':p2,'p3':p3})
+
+# def single(request):
+#     return render(request, 'other/single.html', {"BASE_URL": settings.BASE_URL})
