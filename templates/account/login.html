@@ -1,0 +1,53 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+<!--banner-->
+<div class="banner-top">
+	<div class="container">
+		<h3>Login</h3>
+		<h4><a href="{{BASE_URL}}home">Home</a><label>/</label>Login</h4>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<!--login-->
+
+<div class="login">
+
+	<div class="main-agileits">
+		<div class="form-w3agile">
+			<h3>Login</h3>
+			<form method="post">
+				{% csrf_token %}
+				<div class="key">
+					<i class="fa fa-envelope" aria-hidden="true"></i>
+					<input type="text" value="email" name="username" onfocus="this.value = '';"
+						onblur="if (this.value == '') {this.value = 'Email';}" required="">
+					<div class="clearfix"></div>
+				</div>
+				<div class="key">
+					<i class="fa fa-lock" aria-hidden="true"></i>
+					<input type="password" value="Password" name="password1" onfocus="this.value = '';"
+						onblur="if (this.value == '') {this.value = 'Password';}" required="">
+					<div class="clearfix"></div>
+				</div>
+				<input type="submit" value="Login">
+			</form>
+			<div>
+				<h3>
+					{% for message in messages %}
+					<h3>{{message}}</h3>
+					{% endfor %}
+
+				</h3>
+			</div>
+		</div>
+		<div class="forg">
+			<a href="#" class="forg-left">Forgot Password</a>
+			<a href="{{BASE_URL}}account/register" class="forg-right">Register</a>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

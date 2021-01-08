@@ -1,0 +1,339 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+<div>
+	<h3>
+		{% for message in messages %}
+		<h3>{{message}}</h3>
+		{% endfor %}
+
+	</h3>
+</div>
+
+
+<!-- <div data-vide-bg="video/video">
+	<div class="container">
+		<div class="banner-info">
+			<h3>It is a long established fact that a reader will be distracted by
+				the readable </h3>
+			<div class="search-form">
+				<form action="#" method="post">
+					<input type="text" placeholder="Search..." name="Search...">
+					<input type="submit" value=" ">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+<script src="{% static 'js/jquery.vide.min.js' %}"></script> -->
+
+<!--content-->
+<div class="content-top ">
+	<div class="container ">
+		<div class="spec ">
+			<h3>Special Offers</h3>
+			<div class="ser-t">
+				<b></b>
+				<span><i></i></span>
+				<b class="line"></b>
+			</div>
+		</div>
+		<div class="tab-head ">
+			<nav class="nav-sidebar">
+				<ul class="nav tabs ">
+					<li class="active"><a href="#tab1" data-toggle="tab">Staples</a></li>
+					<li class=""><a href="#tab2" data-toggle="tab">Snacks</a></li>
+					<li class=""><a href="#tab3" data-toggle="tab">Fruits & Vegetables</a></li>
+					<li class=""><a href="#tab4" data-toggle="tab">Breakfast & Cereal</a></li>
+				</ul>
+			</nav>
+
+
+
+			<div class=" tab-content tab-content-t ">
+				<!-- Start Tab1 -->
+				<div class="tab-pane active text-style" id="tab1">
+					<div class=" con-w3l">
+						{% for hst in hst %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal4" class="offer-img">
+									<img src="{{hst.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="single.html">{{hst.item}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{hst.discount_price}}</label><em
+												class="item_price">{{hst.price}}</em></p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="add">
+										<button class="btn btn-danger my-cart-btn my-cart-b" data-id="4"
+											data-name="Soya Chunks" data-summary="summary 4" data-price="3.50"
+											data-quantity="1" data-image="images/of3.png">Add to Cart</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- EndTab1 -->
+
+				<!-- Tab 2 -->
+				<div class="tab-pane  text-style" id="tab2">
+					<div class=" con-w3l">
+						{% for hsn in hsn %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">
+									<img src="{{hsn.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="single.html">{{hsn.item}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{hsn.discount_price}}</label><em
+												class="item_price">{{hsn.price}}</em></p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="add">
+										<button class="btn btn-danger my-cart-btn my-cart-b" data-id="5"
+											data-name="Lays" data-summary="summary 5" data-price="0.70"
+											data-quantity="1" data-image="images/of4.png">Add to Cart</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab2 -->
+
+				<!-- Tab 3 -->
+				<div class="tab-pane  text-style" id="tab3">
+					<div class=" con-w3l">
+						{% for fv in fv %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">
+									<img src="{{fv.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="single.html">{{fv.item.url}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{fv.discount_price}}</label><em class="item_price">{{fv.price}}</em>
+										</p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="add">
+										<button class="btn btn-danger my-cart-btn my-cart-b" data-id="9"
+											data-name="Banana" data-summary="summary 9" data-price="1.50"
+											data-quantity="1" data-image="images/of8.png">Add to Cart</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab3 -->
+
+				<!-- Tab 4 -->
+				<div class="tab-pane text-style" id="tab4">
+					<div class=" con-w3l">
+						{% for bkf in bkf %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal13" class="offer-img">
+									<img src="{{bkf.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="single.html">{{bkf.item}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{bkf.discount_price}}</label><em
+												class="item_price">{{bkf.price}}</em></p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="add">
+										<button class="btn btn-danger my-cart-btn my-cart-b" data-id="13"
+											data-name="Honey" data-summary="summary 13" data-price="6.00"
+											data-quantity="1" data-image="images/of12.png">Add to Cart</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab4 -->
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<!--content-->
+<div class="content-mid">
+	<div class="container">
+
+		<div class="col-md-4 m-w3ls">
+			<div class="col-md1 ">
+				<a href="{{BASE_URL}}kitchen/water_beverages">
+					<img src="{% static 'images/co1.jpg' %}" class="img-responsive img" alt="">
+					<div class="big-sa">
+						<h6>New Collections</h6>
+						<h3>Season<span>ing </span></h3>
+						<p>There are many variations of passages of Lorem Ipsum available, but the majority </p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-4 m-w3ls1">
+			<div class="col-md ">
+				<a href="{{BASE_URL}}household/hold">
+					<img src="{% static 'images/co.jpg' %}" class="img-responsive img" alt="">
+					<div class="big-sale">
+						<div class="big-sale1">
+							<h3>Big <span>Sale</span></h3>
+							<p>It is a long established fact that a reader </p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-4 m-w3ls">
+			<div class="col-md2 ">
+				<a href="{{BASE_URL}}kitchen/water_beverages">
+					<img src="{% static 'images/co2.jpg' %}" class="img-responsive img1" alt="">
+					<div class="big-sale2">
+						<h3>Cooking <span>Oil</span></h3>
+						<p>It is a long established fact that a reader </p>
+					</div>
+				</a>
+			</div>
+			<div class="col-md3 ">
+				<a href="{{BASE_URL}}household/hold">
+					<img src="{% static 'images/co3.jpg' %}" class="img-responsive img1" alt="">
+					<div class="big-sale3">
+						<h3>Vegeta<span>bles</span></h3>
+						<p>It is a long established fact that a reader </p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!--content-->
+<!-- Carousel
+    ================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner" role="listbox">
+		<div class="item active">
+			<a href="{{BASE_URL}}kitchen/water_beverages"> <img class="first-slide" src="{% static 'images/ba.jpg' %}"
+					alt="First slide"></a>
+
+		</div>
+		<div class="item">
+			<a href="{{BASE_URL}}personal_care/care"> <img class="second-slide " src="{% static 'images/ba1.jpg' %}"
+					alt="Second slide"></a>
+
+		</div>
+		<div class="item">
+			<a href="{{BASE_URL}}household/hold"><img class="third-slide " src="{% static 'images/ba2.jpg' %}"
+					alt="Third slide"></a>
+
+		</div>
+	</div>
+
+</div><!-- /.carousel -->
+
+<!--content-->
+<div class="product">
+	<div class="container">
+		<div class="spec ">
+			<h3>Special Offers</h3>
+			<div class="ser-t">
+				<b></b>
+				<span><i></i></span>
+				<b class="line"></b>
+			</div>
+		</div>
+		{% for offers in offers %}
+		<div class=" con-w3l">
+			<div class="col-md-3 pro-1">
+				<div class="col-m">
+					<a href="#" data-toggle="modal" data-target="#myModal17" class="offer-img">
+						<img src="{{offers.image.url}}" class="img-responsive" alt="">
+					</a>
+					<div class="mid-1">
+						<div class="women">
+							<h6><a href="single.html">{{offers.item}}</a></h6>
+						</div>
+						<div class="mid-2">
+							<p><label>{{offers.discount_price}}</label><em class="item_price">{{offers.price}}</em></p>
+							<div class="block">
+								<div class="starbox small ghosting"> </div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="add add-2">
+							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1"
+								data-summary="summary 1" data-price="6.00" data-quantity="1"
+								data-image="images/of16.png">Add to Cart</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
