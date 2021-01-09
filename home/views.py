@@ -40,7 +40,7 @@ def contact(request):
         email_content = render_to_string('home/mail.html', data_content)
 
         mess = email.message.Message()
-        mess['Subject'] = 'Welcome to E-Shop'
+        mess['Subject'] = 'Welcome to BIG-Store'
         mess['From'] = settings.EMAIL_HOST_USER
         mess['To'] = 'shubhamupadhyay1014@gmail.com'
         password = settings.EMAIL_HOST_PASSWORD
@@ -52,7 +52,4 @@ def contact(request):
         s.sendmail(mess['From'], [mess['To']], mess.as_string())
         messages.info(
             request, 'Thankyou for contact us, we will reply you shortly')
-
-        return redirect("contact")
-
     return render(request, 'home/contact.html', {"BASE_URL": settings.BASE_URL})

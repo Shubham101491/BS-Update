@@ -16,10 +16,10 @@
 			<div class="col-md-5 single-top">
 				<div class="single-w3agile">
 					
-					{% for img in images %} 
+					{% for img in images %}
 					<div id="picture-frame">
 						<img src="{{img.image.url}}" data-src="images/si-1.jpg" alt=""
-							class="img-responsive" />
+							class="img-responsive"/>
 					</div>
 					<script src="{% static 'js/jquery.zoomtoo.js' %}"></script>
 					<script>
@@ -39,11 +39,9 @@
 						<p class="reduced "><del>{{img.discount_price}}</del>{{img.price}}</p>
 					</div>
 					<div class="block block-w3">
-						<div class="starbox small ghosting"> </div>
+						<div class="starbox small ghosting"></div>
 					</div>
-					<p class="in-pa"> There are many variations of passages of Lorem Ipsum available, but the majority
-						have suffered alteration in some form, by injected humour, or randomised words which don't look
-						even slightly believable. </p>
+					<p class="in-pa">{{img.detail}}</p>
 
 					<ul class="social-top">
 						<li><a href="#" class="icon facebook"><i class="fa fa-facebook"
@@ -56,8 +54,8 @@
 									aria-hidden="true"></i><span></span></a></li>
 					</ul>
 					<div class="add add-3">
-						<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat"
-							data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">Add
+						<button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="{{img.item}}"
+							data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="{{img.image.url}}">Add
 							to Cart</button>
 					</div>
 					{% endfor %}
