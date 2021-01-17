@@ -30,9 +30,10 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('household/', include('household.urls')),
 
+    # path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/password_reset/',include('django.contrib.auth.urls')),
+    # path('accounts/password_reset/done/', include('django.contrib.auth.urls')),
+    # path('accounts/reset/<uidb64>/<token>/', include('django.contrib.auth.urls')),
+    # path('accounts/reset/done/', include('django.contrib.auth.urls')),
+
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-# another Ways to add Media video telusko #20 3:35
-# urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_URL)
-# urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -19,8 +19,9 @@
 			<h3>Register</h3>
 			<form method="POST">
 				{% csrf_token %}
+				{{register_form}}
 
-				<div class="key">
+				<!-- <div class="key">
 					<i class="fa fa-user" aria-hidden="true"></i>
 					<input type="text" value="Username" name="username" onfocus="this.value = '';"
 						onblur="if (this.value == '') {this.value = 'Username';}" required="">
@@ -43,7 +44,7 @@
 					<input type="password" value="Confirm Password" name="password2" onfocus="this.value = '';"
 						onblur="if (this.value == '') {this.value = 'Confirm Password';}" required="">
 					<div class="clearfix"></div>
-				</div>
+				</div> -->
 				<input type="submit" value="Submit">
 			</form>
 		</div>
@@ -56,7 +57,11 @@
 
 			</h3>
 		</div>
-
+		<div class="forg">
+			<!-- <a href="{% url 'password_reset' %}" class="forg-left">Forgot Password</a> -->
+			<a href="{{BASE_URL}}account/login" class="forg-right">Login</a>
+			<div class="clearfix"></div>
+		</div>
 	</div>
 </div>
 

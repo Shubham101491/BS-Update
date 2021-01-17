@@ -20,12 +20,11 @@ def faqs(request):
     return render(request, 'other/faqs.html', {"BASE_URL": settings.BASE_URL})
 
 def offer(request):
-    allimages = special_offer.objects.filter(id=id)
     hst = Staples.objects.all()
     hsn = Snacks.objects.all()
     fv = Fruits_Vegetables.objects.all()
     bkf = Breakfast_Cereal.objects.all()
-    return render(request, 'other/offer.html', {"BASE_URL": settings.BASE_URL, 'images': allimages,
+    return render(request, 'other/offer.html', {"BASE_URL": settings.BASE_URL,
                                                 'hst': hst, 'hsn': hsn, 'fv': fv, 'bkf': bkf})
 
 def wishlist(request):
