@@ -1,23 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from bigstore import settings
 
 # Model
 from kitchen.models import Category1, Kitchen_base, popular1, popular2, popular3
-from home.models import Staples,Snacks,Fruits_Vegetables,Breakfast_Cereal
+from home.models import Staples, Snacks, Fruits_Vegetables, Breakfast_Cereal
+
+
+def product(request, id):
+    product = request.POST.get('product')
+    cart = request.session.get('cart')
+    remove = request.POST.get('remove')
+    if cart:
+        quantity = cart.get(product)
+        if quantity:
+            if remove:
+                if quantity <= 1:
+                    cart.pop(product)
+                else:
+                    cart[product] = quantity-1
+            else:
+                cart[product] = quantity+1
+        else:
+            cart[product] = 1
+    else:
+        cart = {}
+        cart[product] = 1
+    request.session['cart'] = cart
+    print('cart', request.session['cart'])
+    ids = list(request.session.get('cart').keys())
+    kitch = Kitchen_base.objects.filter(id__in=ids)
+    return redirect('water_beverages')
 
 
 def water_beverages(request):
+    kitch = None
     kitch = Kitchen_base.objects.all()
-    p1 = popular1.objects.all()
-    p2 = popular2.objects.all()
-    p3 = popular3.objects.all()
-    return render(request, 'kitchen/kitchen.html', {"BASE_URL": settings.BASE_URL, 'kitch': kitch, 'p1': p1, 'p2': p2, 'p3': p3})
-
-
-# def kitch_prod(request,id):
-#     hst = Staples.objects.all()
-#     hsn = Snacks.objects.all()
-#     fv = Fruits_Vegetables.objects.all()
-#     bkf = Breakfast_Cereal.objects.all()
-#     allimages = Kitchen_base.objects.filter(id=id)
-#     return render(request, 'other/single.html', {"BASE_URL": settings.BASE_URL,'hst':hst,'hsn':hsn,'fv':fv,'bkf':bkf,'images': allimages})
+    data = {}
+    data['BASE_URL'] = settings.BASE_URL
+    data['kitch'] = kitch
+    return render(request, 'kitchen/kitchen.html', data)

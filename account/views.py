@@ -44,6 +44,9 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
+            # use session for cookies
+            request.session['user_id'] = user.id
+            request.session['email'] = user.email
             return redirect('home')
         else:
             messages.info(request, "Invalid Credential")

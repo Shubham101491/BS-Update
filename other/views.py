@@ -30,6 +30,7 @@ def offer(request):
 def wishlist(request):
     return render(request, 'other/wishlist.html', {"BASE_URL": settings.BASE_URL})
 
+
 # Kitchen Data
 def single_detail_1(request, id):
     allimages = Kitchen_base.objects.filter(id=id)

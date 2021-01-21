@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+<!-- add templatetags file -->
+{% load cart %}
+
 <!-- Carousel
     ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -26,14 +29,14 @@
 		</div>
 	</div>
 
-</div><!-- /.carousel -->
+</div>
+<!-- /.carousel -->
 
 <!--content-->
 <div class="kic-top ">
 	<div class="container ">
 		<div class="kic ">
 			<h3>Popular Categories</h3>
-
 		</div>
 		<div class="col-md-4 kic-top1">
 			{% for p1 in p1 %}
@@ -97,20 +100,49 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="add">
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="{{kitch.id}}" data-name="{{kitch.item}}"
-								data-summary="summary 24" data-price="6.00" data-quantity="1"
-								data-image="{{kitch.image.url}}">Add to Cart</button>
+
+						{% if kitch|is_in_cart:request.session.cart %}
+						<div class="row">
+							<form action="/kitchen/product/{{kitch.id}}" method="POST">
+								{% csrf_token %}
+								<input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+								<div class="img-cap">
+									<input hidden type="text" name="product" value="{{kitch.id}}">
+									<input hidden type="text" name="remove" value="True">
+								</div>
+							</form>
+
+							<div class="text-cener col">{{kitch|cart_quantity:request.session.cart}}</div>
+
+							<form action="/kitchen/product/{{kitch.id}}" method="POST">
+								{% csrf_token %}
+								<input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+								<div class="img-cap">
+									<div class="img-cap">
+										<input hidden type="text" name="product" value="{{kitch.id}}">
+									</div>
+							</form>
+							
 						</div>
 					</div>
+					{% else %}
+
+					<form action="/kitchen/product/{{kitch.id}}" method="POST">
+						{% csrf_token %}
+						<div class="add">
+							<button class="btn btn-danger my-cart-btn my-cart-b" value="{{kitch.id}}" name="product">Add
+								to Cart</button>
+						</div>
+					</form>
+					{% endif %}
 				</div>
-				
 			</div>
-			{% endfor %}
-			<div class="clearfix"></div>
-			
 		</div>
+		{% endfor %}
+		<div class="clearfix"></div>
 	</div>
 </div>
-
+</div>
+</div>
+</div>
 {% endblock %}

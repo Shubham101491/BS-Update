@@ -21,6 +21,7 @@ def home(request):
     fv = Fruits_Vegetables.objects.all()
     bkf = Breakfast_Cereal.objects.all()
     offers = special_offer.objects.all()
+    print("you'r Email", request.session.get('email'))
     return render(request, 'home/index.html', {"BASE_URL": settings.BASE_URL,
                 'offers': offers,'hst':hst,'hsn':hsn,'fv':fv,'bkf':bkf})
 
