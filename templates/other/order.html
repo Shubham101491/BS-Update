@@ -33,20 +33,20 @@
                 <th class="t-head">Sub Total</th>
             </tr>
 
-            {% for kitch in kitch %}
+            {% for product in product %}
             <tr class="cross">
 
                 <td class="ring-in t-data">
-                    <img src="{{kitch.image.url}}" class="img-responsive" alt="">
+                    <img src="{{product.image.url}}" class="img-responsive" alt="">
                     <div class="sed">
-                        <h5>{{kitch.detail}}</h5>
+                        <h5>{{product.detail}}</h5>
                     </div>
                     <div class="clearfix"> </div>
                 </td>
 
-                <td class="t-data">{{kitch.discount_price}}</td>
+                <td class="t-data">{{product.discount_price}}</td>
 
-                <td class="t-data">{{kitch|cart_quantity:request.session.cart}}
+                <td class="t-data">{{product|cart_quantity:request.session.cart}}
                     <div class="product_count">
                 </td>
 
@@ -57,6 +57,4 @@
         </table>
     </div>
 </div>
-
-
 {% endblock %}

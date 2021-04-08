@@ -1,0 +1,221 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+<!--banner-->
+<div class="banner-top">
+    <div class="container">
+        <h3>PD2</h3>
+        <h4><a href="{{BASE_URL}}home">Home</a><label>/</label>Lorem</h4>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<div class="single">
+    <div class="container">
+        <div class="single-top-main">
+            <div class="col-md-5 single-top">
+                <div class="single-w3agile">
+
+                    {% for hst in hst %}
+                    <div id="picture-frame">
+                        <img src="{{hst.image.url}}" data-src="images/si-1.jpg" alt="" class="img-responsive" />
+                    </div>
+                    <script src="{% static 'js/jquery.zoomtoo.js' %}"></script>
+                    <script>
+                        $(function () {
+                            $("#picture-frame").zoomToo({
+                                magnify: 1
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+            <div class="col-md-7 single-top-left ">
+                <div class="single-right">
+                    <h3>{{hst.item}}</h3>
+                    <div class="pr-single">
+                        <p class="reduced "><del>{{hst.discount_price}}</del>{{hst.price}}</p>
+                    </div>
+                    <div class="block block-w3">
+                        <div class="starbox small ghosting"></div>
+                    </div>
+                    <p class="in-pa">{{hst.detail}}</p>
+
+                    <ul class="social-top">
+                        <li><a href="#" class="icon facebook"><i class="fa fa-facebook"
+                                    aria-hidden="true"></i><span></span></a></li>
+                        <li><a href="#" class="icon twitter"><i class="fa fa-twitter"
+                                    aria-hidden="true"></i><span></span></a></li>
+                        <li><a href="#" class="icon pinterest"><i class="fa fa-pinterest-p"
+                                    aria-hidden="true"></i><span></span></a></li>
+                        <li><a href="#" class="icon dribbble"><i class="fa fa-dribbble"
+                                    aria-hidden="true"></i><span></span></a></li>
+                    </ul>
+
+                    <form action="/home/product/{{hst.id}}" method="POST">
+                        {% csrf_token %}
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b" value="{{hst.id}}" name="product">Add
+                                to Cart</button>
+                        </div>
+                    </form>
+
+                    {% endfor %}
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+<!-- Special Offers -->
+<!--content-->
+<div class="content-top offer-w3agile">
+    <div class="container ">
+        <div class="spec ">
+            <h3>Special Offers</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+
+        <div class=" con-w3l wthree-of">
+            {% for hst in hst %}
+            <div class="col-md-3 pro-1">
+                <div class="col-m">
+                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+                        <img src="{{hst.image.url}}" class="img-responsive" alt="">
+                        <div class="offer">
+                            <p><span>Offer</span></p>
+                        </div>
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                            <h6><a href="{{BASE_URL}}other/single_detail_4/{{hst.id}}">{{hst.item}}</a></h6>
+                        </div>
+                        <div class="mid-2">
+                            <p><label>{{hst.discount_price}}</label><em class="item_price">{{hst.price}}</em></p>
+                            <div class="block">
+                                <div class="starbox small ghosting"> </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong"
+                                data-summary="summary 1" data-price="1.50" data-quantity="1"
+                                data-image="images/of.png">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+
+        <div class=" con-w3l wthree-of">
+            {% for hsn in hsn %}
+            <div class="col-md-3 pro-1">
+                <div class="col-m">
+                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+                        <img src="{{hsn.image.url}}" class="img-responsive" alt="">
+                        <div class="offer">
+                            <p><span>Offer</span></p>
+                        </div>
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                            <h6><a href="{{BASE_URL}}other/single_detail_4/{{hsn.id}}">{{hsn.item}}</a></h6>
+                        </div>
+                        <div class="mid-2">
+                            <p><label>{{hsn.discount_price}}</label><em class="item_price">{{hsn.price}}</em></p>
+                            <div class="block">
+                                <div class="starbox small ghosting"> </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong"
+                                data-summary="summary 1" data-price="1.50" data-quantity="1"
+                                data-image="images/of.png">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+
+        <div class=" con-w3l wthree-of">
+            {% for fv in fv %}
+            <div class="col-md-3 pro-1">
+                <div class="col-m">
+                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+                        <img src="{{fv.image.url}}" class="img-responsive" alt="">
+                        <div class="offer">
+                            <p><span>Offer</span></p>
+                        </div>
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                            <h6><a href="{{BASE_URL}}other/single_detail_4/{{fv.id}}">{{fv.item}}</a></h6>
+                        </div>
+                        <div class="mid-2">
+                            <p><label>{{fv.discount_price}}</label><em class="item_price">{{fv.price}}</em></p>
+                            <div class="block">
+                                <div class="starbox small ghosting"> </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong"
+                                data-summary="summary 1" data-price="1.50" data-quantity="1"
+                                data-image="images/of.png">Add to Cart</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+
+        <div class=" con-w3l wthree-of">
+            {% for bkf in bkf %}
+            <div class="col-md-3 pro-1">
+                <div class="col-m">
+                    <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+                        <img src="{{bkf.image.url}}" class="img-responsive" alt="">
+                        <div class="offer">
+                            <p><span>Offer</span></p>
+                        </div>
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                            <h6><a href="{{BASE_URL}}other/single_detail_4/{{bkf.id}}">{{bkf.item}}</a></h6>
+                        </div>
+                        <div class="mid-2">
+                            <p><label>{{bkf.discount_price}}</label><em class="item_price">{{bkf.price}}</em></p>
+                            <div class="block">
+                                <div class="starbox small ghosting"> </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong"
+                                data-summary="summary 1" data-price="1.50" data-quantity="1"
+                                data-image="images/of.png">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

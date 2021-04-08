@@ -1,0 +1,90 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+<!-- add templatetags file -->
+{% load cart %}
+
+<!--banner-->
+<div class="banner-top">
+    <div class="container">
+        <h3>Wishlist</h3>
+        <h4><a href="{{BASE_URL}}home">Home</a><label>/</label>Wishlist</h4>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<!-- contact -->
+<div class="check-out">
+    <div class="container">
+        <div class="spec ">
+            <h3>Wishlist</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <script>$(document).ready(function (c) {
+                $('.close1').on('click', function (c) {
+                    $('.cross').fadeOut('slow', function (c) {
+                        $('.cross').remove();
+                    });
+                });
+            });
+        </script>
+
+        <table class="table ">
+            <tr>
+                <th class="t-head head-it ">Products</th>
+                <th class="t-head">Price</th>
+                <th class="t-head">Quantity</th>
+                <th class="t-head">Sub Total</th>
+            </tr>
+
+            {% for product in product %}
+            <tr class="cross">
+                <td class="ring-in t-data">
+                    <a href="{{BASE_URL}}other/single_detail_1/{{product.id}}" class="at-in">
+                        <img src="{{product.image.url}}" class="img-responsive" alt="">
+                    </a>
+                    <div class="sed">
+                        <h5>{{product.detail}}</h5>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <div class="close1"> <i class="fa fa-times" aria-hidden="true"></i></div>
+                </td>
+
+                <td class="t-data">{{product.discount_price}}</td>
+
+                <td class="text-cener col">{{product|cart_quantity:request.session.cart}}</td>
+
+                <!-- Sub total -->
+                <td class="t-data">{{product|price_total:request.session.cart}}</td>
+
+            </tr>
+            {% endfor %} 
+            <tr>
+                
+                <th class="t-head">2000</th>
+            </tr>
+        </table>
+    </div>
+    
+    <a href="{{BASE_URL}}cart/checkout"><button class="btn btn-danger my-cart-btn my-cart-b">CHECKOUT</button></a>
+</div>
+
+<!--quantity-->
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1) divUpd.text(newVal);
+    });
+</script>
+<!--quantity-->
+{% endblock %}

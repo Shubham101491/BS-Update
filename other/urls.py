@@ -6,7 +6,7 @@ urlpatterns = [
     path('terms/', views.terms, name='terms'),
     path('faqs/', views.faqs, name='faqs'),
     path('wishlist/', views.wishlist, name='wishlist'),
-    
+
     path('offer/', views.offer, name='offer'),
 
 
@@ -17,6 +17,6 @@ urlpatterns = [
     # HouseHold Data
     path('single_detail_3/<int:id>', views.single_detail_3, name='single_detail_3'),
     # Special Data
-    # path('single_detail_4/<int:id>', views.single_detail_4, name='single_detail_4'),
+    path('single_detail_4/<int:id>', views.single_detail_4, name='single_detail_4'),
 
 ]

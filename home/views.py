@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from bigstore import settings
 
 # Email Part
@@ -11,9 +11,37 @@ import smtplib
 from django.contrib import messages
 
 # Model
-from home.models import Home,Staples,Snacks,Fruits_Vegetables,Breakfast_Cereal
+from home.models import Home, Staples, Snacks, Fruits_Vegetables, Breakfast_Cereal
 from other.models import Offer, special_offer
 
+def product(request, id):
+    product = request.POST.get('product')
+    cart = request.session.get('cart')
+    remove = request.POST.get('remove')
+    if cart:
+        quantity = cart.get(product)
+        if quantity:
+            if remove:
+                if quantity <= 1:
+                    cart.pop(product)
+                else:
+                    cart[product] = quantity-1
+            else:
+                cart[product] = quantity+1
+        else:
+            cart[product] = 1
+    else:
+        cart = {}
+        cart[product] = 1
+    request.session['cart'] = cart
+    # print('cart', request.session['cart'])
+    ids = list(request.session.get('cart').keys())
+    hst = Staples.objects.filter(id__in=ids)
+    # hsn = Snacks.objects.filter(id__in=ids)
+    # fv = Fruits_Vegetables.objects.filter(id__in=ids)
+    # bkf = Breakfast_Cereal.objects.filter(id__in=ids)
+    print('p', Staples.objects.filter(id__in=ids))
+    return redirect('home')
 
 def home(request):
     hst = Staples.objects.all()
@@ -21,14 +49,12 @@ def home(request):
     fv = Fruits_Vegetables.objects.all()
     bkf = Breakfast_Cereal.objects.all()
     offers = special_offer.objects.all()
-    print("you'r Email", request.session.get('email'))
+    print('you are :', request.session.get('username'))
     return render(request, 'home/index.html', {"BASE_URL": settings.BASE_URL,
-                'offers': offers,'hst':hst,'hsn':hsn,'fv':fv,'bkf':bkf})
-
+                                               'offers': offers, 'hst': hst, 'hsn': hsn, 'fv': fv, 'bkf': bkf})
 
 def about(request):
     return render(request, 'home/about.html', {"BASE_URL": settings.BASE_URL})
-
 
 def contact(request):
     if request.method == 'POST':

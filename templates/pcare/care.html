@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+<!-- add templatetags file -->
+{% load cart %}
+
 <!-- Carousel
     ================================================== -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -13,15 +16,18 @@
 	</ol>
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<a href="{{BASE_URL}}personal_care/care"><img class="first-slide" src="{% static 'images/ba1.jpg' %}" alt="First slide"></a>
+			<a href="{{BASE_URL}}personal_care/care"><img class="first-slide" src="{% static 'images/ba1.jpg' %}"
+					alt="First slide"></a>
 
 		</div>
 		<div class="item">
-			<a href="{{BASE_URL}}kitchen/water_beverages"><img class="second-slide " src="{% static 'images/ba.jpg' %}" alt="Second slide"></a>
+			<a href="{{BASE_URL}}kitchen/water_beverages"><img class="second-slide " src="{% static 'images/ba.jpg' %}"
+					alt="Second slide"></a>
 
 		</div>
 		<div class="item">
-			<a href="{{BASE_URL}}household/hold"><img class="third-slide " src="{% static 'images/ba2.jpg' %}" alt="Third slide"></a>
+			<a href="{{BASE_URL}}household/hold"><img class="third-slide " src="{% static 'images/ba2.jpg' %}"
+					alt="Third slide"></a>
 
 		</div>
 	</div>
@@ -54,7 +60,7 @@
 			<p>{{p2.caption}}</p>
 		</div>
 		{% endfor %}
-		
+
 		<div class="col-md-4 kic-top1">
 			{% for p3 in p3 %}
 			<a href="{{BASE_URL}}other/single">
@@ -90,24 +96,56 @@
 							<h6><a href="{{BASE_URL}}other/single_detail_2/{{ayurved.id}}">{{ayurved.item}}</a></h6>
 						</div>
 						<div class="mid-2">
-							<p><label>{{ayurved.discount_price}}</label><em class="item_price">{{ayurved.price}}</em></p>
+							<p><label>{{ayurved.discount_price}}</label><em class="item_price">{{ayurved.price}}</em>
+							</p>
 							<div class="block">
 								<div class="starbox small ghosting"> </div>
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="add">
-							<button class="btn btn-danger my-cart-btn my-cart-b" data-id="{{ayurved.id}}" data-name="{{ayurved.item}}"
-								data-summary="summary 36" data-price="6.00" data-quantity="1"
-								data-image="{{ayurved.image.url}}">Add to Cart</button>
+
+						{% if ayurved|is_in_cart:request.session.cart %}
+						<div class="row">
+							<form action="/personal_care/product/{{ayurved.id}}" method="POST">
+								{% csrf_token %}
+								<input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+								<div class="img-cap">
+									<input hidden type="text" name="product" value="{{ayurved.id}}">
+									<input hidden type="text" name="remove" value="True">
+								</div>
+							</form>
+
+							<div class="text-cener col">{{ayurved|cart_quantity:request.session.cart}}</div>
+
+							<form action="/personal_care/product/{{ayurved.id}}" method="POST">
+								{% csrf_token %}
+								<input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+								<div class="img-cap">
+									<div class="img-cap">
+										<input hidden type="text" name="product" value="{{ayurved.id}}">
+									</div>
+							</form>
 						</div>
 					</div>
+					{% else %}
+
+					<form action="/personal_care/product/{{ayurved.id}}" method="POST">
+						{% csrf_token %}
+						<div class="add">
+							<button class="btn btn-danger my-cart-btn my-cart-b" value="{{ayurved.id}}"
+								name="product">Add
+								to Cart</button>
+						</div>
+					</form>
+
+					{% endif %}
 				</div>
 			</div>
-			{% endfor %}
-			<div class="clearfix"></div>
 		</div>
+		{% endfor %}
+		<div class="clearfix"></div>
 	</div>
+</div>
 </div>
 
 {% endblock %}

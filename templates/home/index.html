@@ -2,6 +2,10 @@
 {% load static %}
 {% block content %}
 
+<!-- add templatetags file -->
+{% load cart %}
+
+
 <!-- Message Part -->
 {% if messages %}
 <div class="col-md-12">
@@ -22,23 +26,51 @@
 	{% endfor %}
 	{% endif %}
 
-	<!-- <div data-vide-bg="video/video">
-	<div class="container">
-		<div class="banner-info">
-			<h3>It is a long established fact that a reader will be distracted by
-				the readable </h3>
-			<div class="search-form">
-				<form action="#" method="post">
-					<input type="text" placeholder="Search..." name="Search...">
-					<input type="submit" value=" ">
-				</form>
+	<!-- <div class="search-form">
+					<form action="/search/find/" method="GET" value="{{request.GET.q}}">
+						Search <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search posts" />
+						<input type="submit" name="submit" value="Search" />
+					</form>
+				</div> -->
+
+	<div data-vide-bg="{% static 'video/video' %}">
+		<div class="container">
+			<div class="banner-info">
+				<h3>It is a long established fact that a reader will be distracted by
+					the readable </h3>
+
+				<div class="search-form">
+					<form action="/search/find/" method="Get" value="{{request.GET.q}}">
+						<input type="text" name="q" value="{{request.GET.q}}" placeholder="Search...">
+						<input type="submit" value=" ">
+					</form>
+				</div>
+
+				{% if submitbutton == 'Search' and request.GET.q != '' %}
+				{% if results %}
+				<h1>Results for <b>{{ request.GET.q }}</b></h1>
+				<br /><br />
+
+				{% for result in results %}
+
+				{{result.item}}
+				<br />
+
+				{{result.detail}}
+				<br />
+
+				{% endfor %}
+				{% else %}
+				No search results for this query
+				{% endif %}
+				{% endif %}
+
 			</div>
 		</div>
 	</div>
-</div>
 
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
-<script src="{% static 'js/jquery.vide.min.js' %}"></script> -->
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+	<script src="{% static 'js/jquery.vide.min.js' %}"></script>
 
 	<!--content-->
 	<div class="content-top ">
@@ -76,7 +108,8 @@
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">{{hst.item}}</a></h6>
+											<h6><a href="{{BASE_URL}}other/single_detail_4/{{hst.id}}">{{hst.item}}</a>
+											</h6>
 										</div>
 										<div class="mid-2">
 											<p><label>{{hst.discount_price}}</label><em
@@ -86,138 +119,254 @@
 											</div>
 											<div class="clearfix"></div>
 										</div>
-										<div class="add">
-											<button class="btn btn-danger my-cart-btn my-cart-b" data-id="4"
-												data-name="Soya Chunks" data-summary="summary 4" data-price="3.50"
-												data-quantity="1" data-image="images/of3.png">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<!-- EndTab1 -->
 
-					<!-- Tab 2 -->
-					<div class="tab-pane  text-style" id="tab2">
-						<div class=" con-w3l">
-							{% for hsn in hsn %}
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">
-										<img src="{{hsn.image.url}}" class="img-responsive" alt="">
-										<div class="offer">
-											<p><span>Offer</span></p>
-										</div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">{{hsn.item}}</a></h6>
-										</div>
-										<div class="mid-2">
-											<p><label>{{hsn.discount_price}}</label><em
-													class="item_price">{{hsn.price}}</em></p>
-											<div class="block">
-												<div class="starbox small ghosting"> </div>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="add">
-											<button class="btn btn-danger my-cart-btn my-cart-b" data-id="5"
-												data-name="Lays" data-summary="summary 5" data-price="0.70"
-												data-quantity="1" data-image="images/of4.png">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<!-- End Tab2 -->
+										{% if hst|is_in_cart:request.session.cart %}
+										<div class="row">
+											<form action="/home/product/{{hst.id}}" method="POST">
+												{% csrf_token %}
+												<input type="submit" value=" - "
+													class="col-2 btn btn-block btn-secondary">
+												<div class="img-cap">
+													<input hidden type="text" name="product" value="{{hst.id}}">
+													<input hidden type="text" name="remove" value="True">
+												</div>
+											</form>
 
-					<!-- Tab 3 -->
-					<div class="tab-pane  text-style" id="tab3">
-						<div class=" con-w3l">
-							{% for fv in fv %}
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">
-										<img src="{{fv.image.url}}" class="img-responsive" alt="">
-										<div class="offer">
-											<p><span>Offer</span></p>
-										</div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">{{fv.item.url}}</a></h6>
-										</div>
-										<div class="mid-2">
-											<p><label>{{fv.discount_price}}</label><em
-													class="item_price">{{fv.price}}</em>
-											</p>
-											<div class="block">
-												<div class="starbox small ghosting"> </div>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="add">
-											<button class="btn btn-danger my-cart-btn my-cart-b" data-id="9"
-												data-name="Banana" data-summary="summary 9" data-price="1.50"
-												data-quantity="1" data-image="images/of8.png">Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							{% endfor %}
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<!-- End Tab3 -->
+											<div class="text-cener col">{{hst|cart_quantity:request.session.cart}}</div>
 
-					<!-- Tab 4 -->
-					<div class="tab-pane text-style" id="tab4">
-						<div class=" con-w3l">
-							{% for bkf in bkf %}
-							<div class="col-md-3 m-wthree">
-								<div class="col-m">
-									<a href="#" data-toggle="modal" data-target="#myModal13" class="offer-img">
-										<img src="{{bkf.image.url}}" class="img-responsive" alt="">
-										<div class="offer">
-											<p><span>Offer</span></p>
-										</div>
-									</a>
-									<div class="mid-1">
-										<div class="women">
-											<h6><a href="single.html">{{bkf.item}}</a></h6>
-										</div>
-										<div class="mid-2">
-											<p><label>{{bkf.discount_price}}</label><em
-													class="item_price">{{bkf.price}}</em></p>
-											<div class="block">
-												<div class="starbox small ghosting"> </div>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="add">
-											<button class="btn btn-danger my-cart-btn my-cart-b" data-id="13"
-												data-name="Honey" data-summary="summary 13" data-price="6.00"
-												data-quantity="1" data-image="images/of12.png">Add to Cart</button>
+											<form action="/home/product/{{hst.id}}" method="POST">
+												{% csrf_token %}
+												<input type="submit" value=" + "
+													class="col-2 btn btn-block btn-secondary">
+												<div class="img-cap">
+													<div class="img-cap">
+														<input hidden type="text" name="product" value="{{hst.id}}">
+													</div>
+											</form>
+
 										</div>
 									</div>
+									{% else %}
+									<form action="/home/product/{{hst.id}}" method="POST">
+										{% csrf_token %}
+										<div class="add">
+											<button class="btn btn-danger my-cart-btn my-cart-b" value="{{hst.id}}"
+												name="product">Add to Cart
+											</button>
+										</div>
+									</form>
+									{% endif %}
 								</div>
 							</div>
-							{% endfor %}
-							<div class="clearfix"></div>
 						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
 					</div>
-					<!-- End Tab4 -->
 				</div>
+				<!-- EndTab1 -->
+
+				<!-- Tab 2 -->
+				<div class="tab-pane  text-style" id="tab2">
+					<div class=" con-w3l">
+						{% for hsn in hsn %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal5" class="offer-img">
+									<img src="{{hsn.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="{{BASE_URL}}other/single_detail_4/{{hsn.id}}">{{hsn.item}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{hsn.discount_price}}</label><em
+												class="item_price">{{hsn.price}}</em></p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									{% if hsn|is_in_cart:request.session.cart %}
+									<form action="/home/product/{{hsn.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<input hidden type="text" name="product" value="{{hsn.id}}">
+											<input hidden type="text" name="remove" value="True">
+										</div>
+									</form>
+
+									<!-- Qnatity -->
+									<div class="text-cener col">{{hsn|cart_quantity:request.session.cart}}</div>
+
+									<form action="/home/product/{{hsn.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<div class="img-cap">
+												<input hidden type="text" name="product" value="{{hsn.id}}">
+											</div>
+									</form>
+									{% else %}
+									<form action="/home/product/{{hsn.id}}" method="POST">
+										{% csrf_token %}
+										<div class="add">
+											<button class="btn btn-danger my-cart-btn my-cart-b" value="{{hsn.id}}"
+												name="product">Add to Cart
+											</button>
+										</div>
+									</form>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab2 -->
+
+				<!-- Tab 3 -->
+				<div class="tab-pane  text-style" id="tab3">
+					<div class=" con-w3l">
+						{% for fv in fv %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal9" class="offer-img">
+									<img src="{{fv.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="{{BASE_URL}}other/single_detail_4/{{fv.id}}">{{fv.item.url}}</a>
+										</h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{fv.discount_price}}</label><em class="item_price">{{fv.price}}</em>
+										</p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									{% if fv|is_in_cart:request.session.cart %}
+									<form action="/home/product/{{fv.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<input hidden type="text" name="product" value="{{fv.id}}">
+											<input hidden type="text" name="remove" value="True">
+										</div>
+									</form>
+
+									<!-- Qnatity -->
+									<div class="text-cener col">{{fv|cart_quantity:request.session.cart}}</div>
+
+									<form action="/home/product/{{hsn.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<div class="img-cap">
+												<input hidden type="text" name="product" value="{{fv.id}}">
+											</div>
+									</form>
+
+									{% else %}
+									<form action="/home/product/{{fv.id}}" method="POST">
+										{% csrf_token %}
+										<div class="add">
+											<button class="btn btn-danger my-cart-btn my-cart-b" value="{{fv.id}}"
+												name="product">Add to Cart
+											</button>
+										</div>
+									</form>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab3 -->
+
+				<!-- Tab 4 -->
+				<div class="tab-pane text-style" id="tab4">
+					<div class=" con-w3l">
+						{% for bkf in bkf %}
+						<div class="col-md-3 m-wthree">
+							<div class="col-m">
+								<a href="#" data-toggle="modal" data-target="#myModal13" class="offer-img">
+									<img src="{{bkf.image.url}}" class="img-responsive" alt="">
+									<div class="offer">
+										<p><span>Offer</span></p>
+									</div>
+								</a>
+								<div class="mid-1">
+									<div class="women">
+										<h6><a href="{{BASE_URL}}other/single_detail_4/{{bkf.id}}">{{bkf.item}}</a></h6>
+									</div>
+									<div class="mid-2">
+										<p><label>{{bkf.discount_price}}</label><em
+												class="item_price">{{bkf.price}}</em></p>
+										<div class="block">
+											<div class="starbox small ghosting"> </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+
+									{% if bkf|is_in_cart:request.session.cart %}
+									<form action="/home/product/{{bkf.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<input hidden type="text" name="product" value="{{bkf.id}}">
+											<input hidden type="text" name="remove" value="True">
+										</div>
+									</form>
+
+									<!-- Qnatity -->
+									<div class="text-cener col">{{bkf|cart_quantity:request.session.cart}}</div>
+
+									<form action="/home/product/{{bkf.id}}" method="POST">
+										{% csrf_token %}
+										<input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+										<div class="img-cap">
+											<div class="img-cap">
+												<input hidden type="text" name="product" value="{{bkf.id}}">
+											</div>
+									</form>
+
+									{% else %}
+
+									<form action="/home/product/{{bkf.id}}" method="POST">
+										{% csrf_token %}
+										<div class="add">
+											<button class="btn btn-danger my-cart-btn my-cart-b" value="{{bkf.id}}"
+												name="product">Add to Cart
+											</button>
+										</div>
+									</form>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<!-- End Tab4 -->
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <!--content-->

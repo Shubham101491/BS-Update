@@ -38,4 +38,5 @@ def water_beverages(request):
     data = {}
     data['BASE_URL'] = settings.BASE_URL
     data['kitch'] = kitch
-    return render(request, 'kitchen/kitchen.html', data)
+    print('you are :', request.session.get('username'))
+    return render(request, 'kitchen/kitchen.html', data,)

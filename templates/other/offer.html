@@ -15,20 +15,16 @@
 		<div class="item active">
 			<a href="{{BASE_URL}}kitchen/water_beverages"><img class="first-slide" src="{% static 'images/ba.jpg' %}"
 					alt="First slide"></a>
-
 		</div>
 		<div class="item">
 			<a href="{{BASE_URL}}personal_care/care"><img class="second-slide " src="{% static 'images/ba1.jpg' %}"
 					alt="Second slide"></a>
-
 		</div>
 		<div class="item">
 			<a href="{{BASE_URL}}household/hold"><img class="third-slide " src="{% static 'images/ba2.jpg' %}"
 					alt="Third slide"></a>
-
 		</div>
 	</div>
-
 </div>
 <!--content-->
 <div class="content-top offer-w3agile">
@@ -54,7 +50,7 @@
 					</a>
 					<div class="mid-1">
 						<div class="women">
-							<h6><a href="single.html">{{offers.item}}</a></h6>
+							<h6><a href="{{BASE_URL}}other/single_detail_4/{{hst.id}}">{{hst.item}}</a></h6>
 						</div>
 						<div class="mid-2">
 							<p><label>{{hst.discount_price}}</label><em class="item_price">{{hst.price}}</em></p>
@@ -68,7 +64,6 @@
 								data-summary="summary 1" data-price="1.50" data-quantity="1"
 								data-image="images/of.png">Add to Cart</button>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -88,7 +83,7 @@
 					</a>
 					<div class="mid-1">
 						<div class="women">
-							<h6><a href="single.html">{{hsn.item}}</a></h6>
+							<h6><a href="{{BASE_URL}}other/single_detail_4/{{hsn.id}}">{{hsn.item}}</a></h6>
 						</div>
 						<div class="mid-2">
 							<p><label>{{hsn.discount_price}}</label><em class="item_price">{{hsn.price}}</em></p>
@@ -122,7 +117,7 @@
 					</a>
 					<div class="mid-1">
 						<div class="women">
-							<h6><a href="single.html">{{fv.item}}</a></h6>
+							<h6><a href="{{BASE_URL}}other/single_detail_4/{{fv.id}}">{{fv.item}}</a></h6>
 						</div>
 						<div class="mid-2">
 							<p><label>{{fv.discount_price}}</label><em class="item_price">{{fv.price}}</em></p>
@@ -156,7 +151,7 @@
 					</a>
 					<div class="mid-1">
 						<div class="women">
-							<h6><a href="single.html">{{bkf.item}}</a></h6>
+							<h6><a href="{{BASE_URL}}other/single_detail_4/{{bkf.id}}">{{bkf.item}}</a></h6>
 						</div>
 						<div class="mid-2">
 							<p><label>{{bkf.discount_price}}</label><em class="item_price">{{bkf.price}}</em></p>

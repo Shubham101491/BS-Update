@@ -1,0 +1,83 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+<!-- add templatetags file -->
+{% load cart %}
+
+<!--content-->
+<div class="product">
+    <div class="container">
+        <div class="spec ">
+            <h3>Products</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+
+        <div class=" con-w3l agileinf">
+            {% for kitch in kitch %}
+            <div class="col-md-3 pro-1">
+                <div class="col-m">
+                    <a href="{{BASE_URL}}kitch_prod" data-toggle="modal" data-target="#myModal1" class="offer-img">
+                        <img src="{{kitch.image.url}}" class="img-responsive" alt="">
+                    </a>
+                    <div class="mid-1">
+                        <div class="women">
+                            <h6><a href="{{BASE_URL}}other/single_detail_1/{{kitch.id}}">{{kitch.item}}</a></h6>
+                        </div>
+                        <div class="mid-2">
+                            <p><label>{{kitch.discount_price}}</label><em class="item_price">{{kitch.price}}</em></p>
+                            <div class="block">
+                                <div class="starbox small ghosting"> </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        {% if kitch|is_in_cart:request.session.cart %}
+                        <div class="row">
+                            <form action="/kitchen/product/{{kitch.id}}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+                                <div class="img-cap">
+                                    <input hidden type="text" name="product" value="{{kitch.id}}">
+                                    <input hidden type="text" name="remove" value="True">
+                                </div>
+                            </form>
+
+                            <div class="text-cener col">{{kitch|cart_quantity:request.session.cart}}</div>
+
+                            <form action="/kitchen/product/{{kitch.id}}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+                                <div class="img-cap">
+                                    <div class="img-cap">
+                                        <input hidden type="text" name="product" value="{{kitch.id}}">
+                                    </div>
+                            </form>
+
+                        </div>
+                    </div>
+                    {% else %}
+
+                    <form action="/kitchen/product/{{kitch.id}}" method="POST">
+                        {% csrf_token %}
+                        <div class="add">
+                            <button class="btn btn-danger my-cart-btn my-cart-b" value="{{kitch.id}}" name="product">Add
+                                to Cart</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="clearfix"></div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

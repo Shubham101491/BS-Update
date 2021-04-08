@@ -30,6 +30,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('household/', include('household.urls')),
     path('cart/', include('cart.urls')),
+    path('search/', include('search.urls')),
 
 
     # path('accounts/', include('django.contrib.auth.urls')),

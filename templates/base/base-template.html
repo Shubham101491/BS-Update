@@ -26,6 +26,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+	<script src="js/jquery.zoomtoo.js"></script>
+	
+	<!-- First JS -->
 	<script type="text/javascript">
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
@@ -40,7 +43,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
 	<!--- start-rate---->
 	<script src="{% static 'js/jstarbox.js' %}"></script>
+	<!-- <script src="{% static 'js/jquery.zoomtoo.js' %}"></script> -->
 	<link rel="stylesheet" href="{% static 'css/jstarbox.css' %}" type="text/css" media="screen" charset="utf-8" />
+
+	<!-- Second JS -->
 	<script type="text/javascript">
 		jQuery(function () {
 			jQuery('.starbox').each(function () {
@@ -62,7 +68,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			});
 		});
 	</script>
-	<!---//End-rate---->
 
 </head>
 
@@ -72,7 +77,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<div class="header">
 
 		<div class="container">
-
 			<div class="logo">
 				<h1><a href="{{BASE_URL}}home"><b>T<br>H<br>E</b>Big Store<span>The Best Supermarket</span></a></h1>
 			</div>
@@ -82,7 +86,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					</li>
 
 					{% if user.is_authenticated %}
-					<li>Hello, {{user.username}}</li>
+					<li>{{user.username}}</li>
 					<li><a href="{{BASE_URL}}account/logout"><i class="fa fa-user" aria-hidden="true"></i>Logout</a>
 					</li>
 
@@ -97,7 +101,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						</a></li>
 					<li><a href="{{BASE_URL}}other/shipping"><i class="fa fa-ship" aria-hidden="true"></i>Shipping</a>
 					</li>
-					<li><a href="{{BASE_URL}}cart/carts"><i class="fa fa-heart" aria-hidden="true"></i>Order</a>
+					<li><a href="{{BASE_URL}}cart/order"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Cart</a>
+						<span class="badge badge-info">{{request.session.cart.keys|length}}</span>
 					</li>
 				</ul>
 			</div>
@@ -115,10 +120,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				</ul>
 			</div>
 
-
 			<div class="nav-top">
 				<nav class="navbar navbar-default">
-
 					<div class="navbar-header nav_2">
 						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
 							data-target="#bs-megadropdown-tabs">
@@ -127,13 +130,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-
-
 					</div>
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
 							<li class=" active"><a href="{{BASE_URL}}home" class="hyper "><span>Home</span></a></li>
-
 							<li class="dropdown ">
 								<a href="#" class="dropdown-toggle  hyper" data-toggle="dropdown"><span>Kitchen<b
 											class="caret"></b></span></a>
@@ -141,7 +141,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									<div class="row">
 										<div class="col-sm-3">
 											<ul class="multi-column-dropdown">
-
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Water &
 														Beverages</a></li>
@@ -154,12 +153,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Branded
 														Food</a></li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Breakfast
@@ -176,12 +172,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Sweets</a>
 												</li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Pickle &
@@ -195,7 +188,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}kitchen/water_beverages"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Tea &amp;
 														Coffee</a></li>
-
 											</ul>
 										</div>
 										<div class="col-sm-3 w3l">
@@ -227,12 +219,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}personal_care/care"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Deo &
 														Purfumes</a></li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}personal_care/care"> <i
 															class="fa fa-angle-right" aria-hidden="true"></i>Hair Care
@@ -246,12 +235,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}personal_care/care"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Skin
 														care</a></li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}personal_care/care"><i
 															class="fa fa-angle-right" aria-hidden="true"></i> Fashion
@@ -265,7 +251,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 												<li><a href="{{BASE_URL}}personal_care/care"><i
 															class="fa fa-angle-right" aria-hidden="true"></i>Sanitary
 														Needs</a></li>
-
 											</ul>
 										</div>
 										<div class="col-sm-3 w3l">
@@ -292,12 +277,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 															aria-hidden="true"></i>Detergents</a></li>
 												<li><a href="{{BASE_URL}}household/hold"><i class="fa fa-angle-right"
 															aria-hidden="true"></i>Gardening Needs</a></li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}household/hold"><i class="fa fa-angle-right"
 															aria-hidden="true"></i>Kitchen & Dining</a></li>
@@ -307,12 +289,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 															aria-hidden="true"></i>Pet Care</a></li>
 												<li><a href="{{BASE_URL}}household/hold"><i class="fa fa-angle-right"
 															aria-hidden="true"></i>Plastic Wear</a></li>
-
 											</ul>
-
 										</div>
 										<div class="col-sm-3">
-
 											<ul class="multi-column-dropdown">
 												<li><a href="{{BASE_URL}}household/hold"><i class="fa fa-angle-right"
 															aria-hidden="true"></i>Pooja Needs</a></li>
@@ -322,7 +301,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 															aria-hidden="true"></i>Safety Accessories</a></li>
 												<li><a href="{{BASE_URL}}household/hold"><i class="fa fa-angle-right"
 															aria-hidden="true"></i>Festive Decoratives </a></li>
-
 											</ul>
 										</div>
 										<div class="col-sm-3 w3l">
@@ -334,20 +312,17 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</div>
 								</ul>
 							</li>
-
 							<!-- <li><a href="codes.html" class="hyper"> <span>Codes</span></a></li> -->
 							<li><a href="{{BASE_URL}}home/contact" class="hyper"><span>Contact Us</span></a></li>
 						</ul>
 					</div>
 				</nav>
-				<div class="cart">
-
+				<!-- <div class="cart">
 					<span class="fa fa-shopping-cart my-cart-icon"><span
 							class="badge badge-notify my-cart-badge"></span></span>
-				</div>
+				</div> -->
 				<div class="clearfix"></div>
 			</div>
-
 		</div>
 	</div>
 	<!---->
@@ -383,7 +358,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<li><a href="{{BASE_URL}}other/faqs">Faqs</a></li>
 					<li><a href="{{BASE_URL}}home/contact">Contact</a></li>
 					<li><a href="{{BASE_URL}}other/offer">Online Shopping</a></li>
-
 				</ul>
 			</div>
 			<div class="col-md-3 footer-grid">
@@ -392,7 +366,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<li><a href="{{BASE_URL}}account/login">Login</a></li>
 					<li><a href="{{BASE_URL}}account/register">Register</a></li>
 					<li><a href="{{BASE_URL}}other/wishlist">Wishlist</a></li>
-
 				</ul>
 			</div>
 			<div class="clearfix"></div>
@@ -419,7 +392,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									aria-hidden="true"></i>shubhamupadhyay1014@gmail.com</a></p>
 					</div>
 					<div class="clearfix"></div>
-
 				</div>
 			</div>
 			<div class="copy-right">
@@ -432,6 +404,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //footer-->
 
 	<!-- smooth scrolling -->
+
+	<!-- Forth JS Bottom - Top -->
 	<script type="text/javascript">
 		$(document).ready(function () {
 			/*
@@ -445,15 +419,17 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			$().UItoTop({ easingType: 'easeOutQuart' });
 		});
 	</script>
+
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<!-- //smooth scrolling -->
 	<!-- for bootstrap working -->
 	<script src="{% static 'js/bootstrap.js' %}"></script>
 	<!-- //for bootstrap working -->
 	<script type='text/javascript' src="{% static 'js/jquery.mycart.js' %}"></script>
+
+	<!-- Fifth  Product Cart + - -->
 	<script type="text/javascript">
 		$(function () {
-
 			var goToCartIcon = function ($addTocartBtn) {
 				var $cartIcon = $(".my-cart-icon");
 				var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "fixed", "z-index": "999" });
@@ -466,7 +442,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					$image.remove();
 				});
 			}
-
 			$('.my-cart-btn').myCart({
 				classCartIcon: 'my-cart-icon',
 				classCartBadge: 'my-cart-badge',
@@ -487,9 +462,18 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					return total * 1;
 				}
 			});
-
 		});
 	</script>
+
+	<!-- Third JS -->
+	<script>
+		$(function () {
+			$("#picture-frame").zoomToo({
+				magnify: 1
+			});
+		});
+	</script>
+	<!---//End Third JS---->
 
 	<!-- product -->
 	<div class="modal fade" id="myModal24" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -514,8 +498,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 							<div class="clearfix"></div>
 						</div>
 						<h4 class="quick">Quick Overview:</h4>
-						<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet
-							doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es</p>
+						<p class="quick_desc"> Nam liber tempor cum soluta nobis eleifend option congue nihil
+							imperdiet
+							doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; es
+						</p>
 						<div class="add-to">
 							<button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="24" data-name="Gel"
 								data-summary="summary 24" data-price="0.80" data-quantity="1"

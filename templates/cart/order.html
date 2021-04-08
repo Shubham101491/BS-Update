@@ -1,0 +1,61 @@
+{% extends "base/base-template.html" %}
+{% load static %}
+{% block content %}
+
+{% load cart %}
+
+<!--banner-->
+<div class="banner-top">
+    <div class="container">
+        <h3>Order</h3>
+        <h4><a href="{{BASE_URL}}home">Home</a><label>/</label>Wishlist</h4>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<!-- contact -->
+<div class="check-out">
+    <div class="container">
+        <div class="spec ">
+            <h3>Order</h3>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+
+        <!-- Jv script -->
+
+        <table class="table ">
+            <tr>
+                <th class="t-head head-it ">Products</th>
+                <th class="t-head">Price</th>
+                <th class="t-head">Quantity</th>
+                <th class="t-head">Sub Total</th>
+            </tr>
+
+            {% for product in product %}
+            <tr class="cross">
+
+                <td class="ring-in t-data">
+                    <img src="{{product.image.url}}" class="img-responsive" alt="">
+                    <div class="sed">
+                        <h5>{{product.detail}}</h5>
+                    </div>
+                    <div class="clearfix"> </div>
+                </td>
+                <td class="t-data">{{product.discount_price}}</td>
+                <td class="t-data">{{product|cart_quantity:request.session.cart}}
+                    <div class="product_count">
+                </td>
+                <td class="t-data t-w3l"></td>
+
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+    <a href="{{BASE_URL}}cart/checkout"><button class="btn btn-danger my-cart-btn my-cart-b">CheckOUT</button></a>
+</div>
+
+{% endblock %}
